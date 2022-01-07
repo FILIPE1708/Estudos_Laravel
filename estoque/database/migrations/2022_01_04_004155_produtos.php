@@ -14,7 +14,7 @@ class Produtos extends Migration
      */
     public function up()
     {
-        Schema::create('produto', function(Blueprint $table){
+        Schema::create('produtos', function(Blueprint $table){
             $table->id()->autoIncrement();
             $table->string('nome')->nullable(false);
             $table->double('valor', 10,2)->nullable(false);

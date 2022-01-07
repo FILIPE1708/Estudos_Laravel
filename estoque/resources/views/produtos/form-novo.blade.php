@@ -36,9 +36,14 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4 mt-2">
+                        <div class="col-md-6 mt-2">
                             <label for="quantidade"><strong>Quantidade:</strong></label>
                             <input type="text" id="quantidade" name="quantidade" class="form-control">
+                        </div>
+
+                        <div class="col-md-6 mt-2">
+                            <label for="tamanho"><strong>Tamanho:</strong></label>
+                            <input type="text" id="tamanho" name="tamanho" class="form-control">
                         </div>
                     </div>
 

@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Produto;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
 Class ProdutoController extends Controller{
 
-    public function lista(){
-        $produtos = DB::select('SELECT * FROM estoque.produto');
+    public function lista()
+    {
+        $produtos = Produto::all();
         return view('produtos/listagem')->with('produtos', $produtos);
     }
 
-    public function mostra(){
-        $id = Request::route('id');
-        $produto = DB::select('SELECT * FROM estoque.produto WHERE id = ?', [$id]);
-        return view('produtos/detalhes')->with('p', $produto[0]);
+    public function mostra($id)
+    {
+        $produto = Produto::find($id);
+        return view('produtos/detalhes')->with('p', $produto);
+    }
+
+    public function remove($id)
+    {
+        $produto = Produto::find($id);
+        $produto->delete();
+        return redirect()->action('ProdutoController@lista');
     }
 
     public function novo()
@@ -23,13 +32,12 @@ Class ProdutoController extends Controller{
         return view('produtos/form-novo');
     }
 
-    public function cadastro()
+    public function cadastra()
     {
-        $nome = Request::input('nome');
-        $valor = Request::input('valor');
-        $descricao = Request::input('descricao');
-        $quantidade = Request::input('quantidade');
-        DB::insert('INSERT INTO estoque.produto(nome, valor, descricao, quantidade) VALUES (?, ?, ?, ?)', array($nome, $valor, $descricao, $quantidade));
+        //$params = Request::all();
+        //$produto = new Produto($params);
+        //$produto->save();
+        Produto::create(Request::all());
 
         return redirect('/produtos')->withInput();
         //return view('produtos/cadastrar')->with('nome', $nome);
