@@ -1,6 +1,15 @@
 @extends('principal')
 @section('conteudo')
 
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger text-center" role="alert">
+            {{$error}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endforeach
+
     <div class="card border-success">
         <div class="card-header bg-success text-center text-white">
             <div class="card-title">
