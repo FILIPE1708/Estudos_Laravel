@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Categoria;
 use App\Http\Requests\ProdutoRequest;
 use App\Produto;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
 Class ProdutoController extends Controller{
+
+    public function __construct()
+    {
+        $this->middleware('autorizador');
+    }
 
     public function lista()
     {
@@ -28,9 +35,16 @@ Class ProdutoController extends Controller{
         return redirect()->action('ProdutoController@lista');
     }
 
+    public function altera()
+    {
+        $produto = Produto::all();
+        return view('produtos/form-altera')->with('p', $produto);
+
+    }
+
     public function novo()
     {
-        return view('produtos/form-novo');
+        return view('produtos/form-novo')->with('categorias', Categoria::all());
     }
 
     public function cadastra(ProdutoRequest $request)
