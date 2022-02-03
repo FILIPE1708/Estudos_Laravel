@@ -59,8 +59,11 @@
                         <div class="col-md-12 mt-2">
                             <label for="categoria_id"><strong>Categoria:</strong></label>
                             <select id="categoria_id" name="categoria_id" class="form-control">
+                                <option value="{{$produto->categoria->id}}">{{$produto->categoria->nome}}</option>
                                 @foreach($categorias as $c)
-                                    <option  value="{{$c->id}}">{{$c->nome}}</option>
+                                    @if($produto->categoria->nome != $c->nome)
+                                        <option  value="{{$c->id}}">{{$c->nome}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

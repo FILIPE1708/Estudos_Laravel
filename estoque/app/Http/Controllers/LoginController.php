@@ -18,9 +18,9 @@ class LoginController extends Controller
 
        if (Auth::attempt($credenciais))
        {
-           return 'Usuário logado com sucesso';
+           return redirect('/produtos');
        }
 
-       return 'Usuário não existe';
+       return redirect()->back();
     }
 }
