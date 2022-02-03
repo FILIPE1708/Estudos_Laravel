@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Categoria;
 use App\Http\Requests\ProdutoRequest;
 use App\Produto;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 Class ProdutoController extends Controller{
 
@@ -35,11 +33,19 @@ Class ProdutoController extends Controller{
         return redirect()->action('ProdutoController@lista');
     }
 
-    public function altera()
+    public function editar($id)
     {
-        $produto = Produto::all();
-        return view('produtos/form-altera')->with('p', $produto);
+        $produto = Produto::find($id);
+        return view('produtos.form-altera', compact('produto'))->with('categorias', Categoria::all());
+    }
 
+    public function alterar(Request $request)
+    {
+        $params = $request->except('_token');
+        $produto = Produto::find($params['id']);
+        $produto->update($params);
+
+        return redirect('/produtos');
     }
 
     public function novo()

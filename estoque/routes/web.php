@@ -11,7 +11,8 @@ Route::get('/produtos/novo', 'ProdutoController@novo');
 Route::post('/produtos/cadastra', 'ProdutoController@cadastra');
 Route::get('/logon', 'LoginController@form');
 Route::post('/logon', 'LoginController@login');
-Route::get('/produtos/altera', 'ProdutoController@altera');
+Route::get('/produtos/editar/{id}', 'ProdutoController@editar');
+Route::get('/produtos/alterar', 'ProdutoController@alterar');
 
 Auth::routes();
 
